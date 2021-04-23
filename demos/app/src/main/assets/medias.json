@@ -1,0 +1,71 @@
+[
+  {
+    "name": "点播视频",
+    "description": "支持本地与网络点播视频",
+    "mediaItems": [
+      {
+        "type": 0,
+        "name": "测试视频1",
+        "uri": "https://movement.gzstv.com/sv/stream_url/-wRU5XwUD1p-/"
+      },
+      {
+        "type": 0,
+        "name": "测试视频2",
+        "uri": "https://mov.bn.netease.com/open-movie/nos/mp4/2015/08/27/SB13F5AGJ_sd.mp4"
+      }
+    ]
+  },
+  {
+    "name": "HLS",
+    "description": "支持HLS直播流",
+    "mediaItems": [
+      {
+        "type": 0,
+        "name": "测试HLS流",
+        "uri": "http://r.ossrs.net/live/livestream.m3u8"
+      },
+      {
+        "type": 0,
+        "name": "CCTV1",
+        "uri": "http://cctvalih5ca.v.myalicdn.com/live/cctv1_2/index.m3u8"
+      },
+      {
+        "type": 0,
+        "name": "贵州卫视",
+        "uri": "https://hls-qnlo-live.gzstv.com/livegztv-lo/CH01_lo.m3u8?s=6ba1e689d1c9a6f246b7ea5ca56d3e8b&ts=606fdd6d"
+      }
+    ]
+  },
+  {
+    "name": "RTMP",
+    "description": "支持RTMP直播流",
+    "mediaItems": [
+      {
+        "type": 0,
+        "name": "测试RTMP流",
+        "uri": "rtmp://r.ossrs.net/live/livestream"
+      }
+    ]
+  },
+  {
+    "name": "HTTP-FLV",
+    "description": "支持HTTP-FLV直播流",
+    "mediaItems": [
+      {
+        "type": 0,
+        "name": "测试HTTP-FLV流1",
+        "uri": "http://r.ossrs.net/live/bbb.flv"
+      },
+      {
+        "type": 0,
+        "name": "测试HTTP-FLV流2",
+        "uri": "http://r.ossrs.net/live/avatar.flv"
+      },
+      {
+        "type": 0,
+        "name": "测试HTTP-FLV流3",
+        "uri": "http://r.ossrs.net/live/livestream.flv"
+      }
+    ]
+  }
+]

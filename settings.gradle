@@ -1,0 +1,12 @@
+include ':demos:future'
+include ':library:player'
+include ':demos:media2'
+include ':demos:exo'
+include ':demos:app'
+
+include ':library:common'
+include ':library:widget'
+
+include ':extensions:exoplayer'
+
+rootProject.name = "Media"
