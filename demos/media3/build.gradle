@@ -1,0 +1,68 @@
+plugins {
+    id 'com.android.application'
+}
+apply from: '../../constants.gradle'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.chengfu.android.media.demos.media3"
+        minSdk 21
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:' + androidxAppCompatVersion
+
+
+    implementation 'androidx.room:room-runtime:' + androidxRoomVersion
+    testImplementation 'junit:junit:4.12'
+    annotationProcessor 'androidx.room:room-compiler:' + androidxRoomVersion
+
+
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    implementation 'androidx.appcompat:appcompat:' + androidxAppCompatVersion
+
+//    implementation 'com.google.android.exoplayer:exoplayer:' + exoPlayerVersion
+//
+//    //ExoPlayer Extensions
+//    implementation 'com.google.android.exoplayer:extension-rtmp:' + exoPlayerVersion
+//    implementation 'com.google.android.exoplayer:extension-media2:' + exoPlayerVersion
+    implementation 'com.google.android.exoplayer:extension-okhttp:' + exoPlayerVersion
+
+    // media
+    implementation "androidx.media:media:1.6.0"
+
+    // media3
+    implementation 'androidx.media3:media3-exoplayer:' + androidxMedia3Version
+    implementation 'androidx.media3:media3-exoplayer-dash:' + androidxMedia3Version
+    implementation 'androidx.media3:media3-exoplayer-hls:' + androidxMedia3Version
+    implementation 'androidx.media3:media3-ui:' + androidxMedia3Version
+    implementation 'androidx.media3:media3-session:' + androidxMedia3Version
+    implementation "androidx.core:core-ktx:1.8.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}

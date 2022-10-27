@@ -21,7 +21,11 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".MusicService">
+        <activity android:name=".MusicPlayActivity" />
+
+        <service android:name=".MusicService" android:foregroundServiceType="mediaPlayback"
+            android:process=":music"
+            android:exported="true">
             <intent-filter>
                 <action android:name="androidx.media2.session.MediaLibraryService" />
             </intent-filter>

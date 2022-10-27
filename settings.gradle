@@ -1,12 +1,31 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = "Media"
+
 include ':demos:future'
-include ':library:player'
 include ':demos:media2'
+include ':demos:media3'
 include ':demos:exo'
 include ':demos:app'
 
-include ':library:common'
-include ':library:widget'
+include ':libraries:common'
+include ':libraries:ui'
+include ':libraries:session'
 
 include ':extensions:exoplayer'
 
-rootProject.name = "Media"
+
+include ':demos:main'

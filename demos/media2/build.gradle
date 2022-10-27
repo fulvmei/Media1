@@ -1,15 +1,15 @@
 plugins {
     id 'com.android.application'
 }
+apply from: '../../constants.gradle'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.chengfu.android.media.demos.media2"
-        minSdkVersion 21
-        targetSdkVersion 30
+        minSdk 21
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
@@ -30,19 +30,24 @@ android {
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
 
-    def media2_version = "1.1.2"
+    def media2_version = "1.2.0-beta01"
 
     // Interacting with MediaSessions
     implementation "androidx.media2:media2-session:$media2_version"
     implementation "androidx.media2:media2-widget:$media2_version"
     implementation "androidx.media2:media2-player:$media2_version"
     implementation "androidx.media2:media2-exoplayer:$media2_version"
+
+    implementation 'com.google.android.exoplayer:extension-media2:'+ exoPlayerVersion
+    implementation 'com.google.guava:guava:27.1-android'
+    implementation 'com.google.android.exoplayer:exoplayer:'+ exoPlayerVersion
+    implementation 'com.google.android.exoplayer:extension-rtmp:'+ exoPlayerVersion
 }

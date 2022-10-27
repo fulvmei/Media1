@@ -3,12 +3,15 @@ package com.chengfu.android.media.demos.media2;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Binder;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.media.AudioAttributesCompat;
 import androidx.media2.common.MediaItem;
 import androidx.media2.common.MediaMetadata;
 import androidx.media2.common.Rating;
@@ -18,6 +21,7 @@ import androidx.media2.player.MediaPlayer;
 import androidx.media2.session.LibraryResult;
 import androidx.media2.session.MediaLibraryService;
 import androidx.media2.session.MediaSession;
+import androidx.media2.session.MediaSessionService;
 import androidx.media2.session.RemoteSessionPlayer;
 import androidx.media2.session.SessionCommand;
 import androidx.media2.session.SessionCommandGroup;
@@ -28,13 +32,15 @@ import java.util.concurrent.Executors;
 
 public class MusicService extends MediaLibraryService {
     SessionPlayer sessionPlayer;
-    MediaLibrarySession mediaLibrarySession;
+    //    MediaLibrarySession mediaLibrarySession;
+    MediaLibrarySession mediaSession;
 
     @Override
     public void onCreate() {
         super.onCreate();
         Log.e("MusicService", "onCreate");
         sessionPlayer = new MediaPlayer(this);
+        sessionPlayer.setAudioAttributes(new AudioAttributesCompat.Builder().setUsage(AudioAttributesCompat.USAGE_MEDIA).build());
         sessionPlayer.registerPlayerCallback(Executors.newSingleThreadExecutor(), new RemoteSessionPlayer.Callback() {
             @Override
             public void onPlayerStateChanged(@NonNull SessionPlayer player, int playerState) {
@@ -63,11 +69,28 @@ public class MusicService extends MediaLibraryService {
             @Override
             public void onPlaylistMetadataChanged(@NonNull SessionPlayer player, @Nullable MediaMetadata metadata) {
                 super.onPlaylistMetadataChanged(player, metadata);
+                Log.e("sessionPlayer", "onPlaylistMetadataChanged");
             }
         });
 
-        mediaLibrarySession = new MediaLibrarySession.Builder(this, sessionPlayer, Executors.newFixedThreadPool(3), sessionCallback).build();
+
+        sessionPlayer.setMediaItem(new UriMediaItem.Builder(Uri.parse("https://media.gzstv.com/audio/434a8d3ebdbe9b71a0e0a7bf9e209f60.mp3")).setMetadata(new MediaMetadata.Builder().putString(MediaMetadata.METADATA_KEY_MEDIA_ID, "999").build()).build());
+
+        mediaSession = new MediaLibrarySession.Builder(this, sessionPlayer,Executors.newFixedThreadPool(3), sessionCallback)
+                .setId("fu")
+                .build();
+//
+//        mediaLibrarySession = new MediaLibrarySession.Builder(this, sessionPlayer, Executors.newFixedThreadPool(3), sessionCallback)
+//                .build();
     }
+
+//    @Nullable
+//    @Override
+//    public MediaSession onGetSession(@NonNull MediaSession.ControllerInfo controllerInfo) {
+//        Log.e("MusicService", "onGetSession controllerInfo=" + controllerInfo);
+//        return mediaSession;
+////        return null;
+//    }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -77,8 +100,24 @@ public class MusicService extends MediaLibraryService {
 
     @Override
     public IBinder onBind(@NonNull Intent intent) {
-        Log.e("MusicService", "onBind action="+intent.getAction());
+        Log.e("MusicService", "onBind action=" + intent.getAction());
         return super.onBind(intent);
+    }
+
+    @Nullable
+    @Override
+    public MediaLibrarySession onGetSession(@NonNull MediaSession.ControllerInfo controllerInfo) {
+        return mediaSession;
+    }
+
+    @Nullable
+    @Override
+    public MediaNotification onUpdateNotification(@NonNull MediaSession session) {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            ContextCompat.startForegroundService(this, new Intent(this, MusicService.class));
+//        }
+        Log.e("MusicService", "onUpdateNotification session=" + session);
+        return super.onUpdateNotification(session);
     }
 
     @Override
@@ -87,17 +126,27 @@ public class MusicService extends MediaLibraryService {
         super.onDestroy();
     }
 
-    @Nullable
-    @Override
-    public MediaLibrarySession onGetSession(@NonNull MediaSession.ControllerInfo controllerInfo) {
-        return mediaLibrarySession;
-    }
+//    @Nullable
+//    @Override
+//    public MediaLibrarySession onGetSession(@NonNull MediaSession.ControllerInfo controllerInfo) {
+//        return mediaLibrarySession;
+//    }
 
     MediaLibrarySession.MediaLibrarySessionCallback sessionCallback = new MediaLibrarySession.MediaLibrarySessionCallback() {
 
         @Override
         public int onCommandRequest(@NonNull MediaSession session, @NonNull MediaSession.ControllerInfo controller, @NonNull SessionCommand command) {
-            Log.e("sessionCallback", "onCommandRequest");
+            Log.e("sessionCallback", "onCommandRequest command=" + command.getCommandCode());
+            switch (command.getCommandCode()) {
+                case SessionCommand.COMMAND_CODE_PLAYER_PREPARE:
+//                    onCreateMediaItem(session,controller,"1");
+                    sessionPlayer.prepare();
+                    break;
+                case SessionCommand.COMMAND_CODE_PLAYER_PLAY:
+//                    onCreateMediaItem(session,controller,"1");
+                    sessionPlayer.play();
+                    break;
+            }
             return super.onCommandRequest(session, controller, command);
         }
 
@@ -143,6 +192,7 @@ public class MusicService extends MediaLibraryService {
             return super.onSkipForward(session, controller);
         }
 
+
         @Override
         public int onSubscribe(@NonNull MediaLibrarySession session, @NonNull MediaSession.ControllerInfo controller, @NonNull String parentId, @Nullable LibraryParams params) {
             Log.e("sessionCallback", "onSubscribe");
@@ -187,14 +237,15 @@ public class MusicService extends MediaLibraryService {
         @Override
         public MediaItem onCreateMediaItem(@NonNull MediaSession session, @NonNull MediaSession.ControllerInfo controller, @NonNull String mediaId) {
             Log.e("sessionCallback", "onCreateMediaItem " + Thread.currentThread());
-            return new UriMediaItem.Builder(Uri.parse("https://movement.gzstv.com/sv/stream_url/-wRU5XwUD1p-/")).setMetadata(new MediaMetadata.Builder().putString(MediaMetadata.METADATA_KEY_MEDIA_ID, mediaId).build()).build();
+            return new UriMediaItem.Builder(Uri.parse("https://media.gzstv.com/audio/434a8d3ebdbe9b71a0e0a7bf9e209f60.mp3")).setMetadata(new MediaMetadata.Builder().putString(MediaMetadata.METADATA_KEY_MEDIA_ID, mediaId).build()).build();
         }
 
         @Nullable
         @Override
         public SessionCommandGroup onConnect(@NonNull MediaSession session, @NonNull MediaSession.ControllerInfo controller) {
-            Log.e("sessionCallback", "onConnect");
+            Log.e("sessionCallback", "onConnect controller="+controller);
             return super.onConnect(session, controller);
+//            return null;
         }
 
         @NonNull
@@ -215,5 +266,7 @@ public class MusicService extends MediaLibraryService {
             Log.e("sessionCallback", "onPostConnect");
             super.onPostConnect(session, controller);
         }
+
     };
+
 }

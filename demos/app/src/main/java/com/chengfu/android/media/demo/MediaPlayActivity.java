@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.chengfu.android.media.demo.bean.MediaItem;
+import com.google.android.exoplayer2.MediaMetadata;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.metadata.Metadata;
@@ -53,6 +54,11 @@ public class MediaPlayActivity extends AppCompatActivity {
             @Override
             public void onStaticMetadataChanged(List<Metadata> metadataList) {
                 Log.e("eee", "onStaticMetadataChanged metadataList="+ metadataList);
+            }
+
+            @Override
+            public void onMediaMetadataChanged(MediaMetadata mediaMetadata) {
+
             }
 
             @Override

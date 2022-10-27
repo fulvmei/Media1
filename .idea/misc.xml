@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/ChengFu/AndroidStudioProjects/Media/demos/exo/src/main/res/layout/activity_main.xml" value="0.125" />
+        <entry key="..\:/ChengFu/AndroidStudioProjects/Media/demos/main/src/main/res/layout/activity_main.xml" value="0.2033514492753623" />
+        <entry key="..\:/ChengFu/AndroidStudioProjects/Media/demos/main/src/main/res/layout/item_dropdown.xml" value="0.1" />
+        <entry key="..\:/ChengFu/AndroidStudioProjects/Media/demos/main/src/main/res/layout/item_select.xml" value="0.1890625" />
+        <entry key="..\:/ChengFu/AndroidStudioProjects/Media/demos/media2/src/main/res/layout/activity_main.xml" value="0.20018115942028986" />
+        <entry key="..\:/ChengFu/AndroidStudioProjects/Media/demos/media3/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.259375" />
+        <entry key="..\:/ChengFu/AndroidStudioProjects/Media/demos/media3/src/main/res/drawable/divider.xml" value="0.168" />
+        <entry key="..\:/ChengFu/AndroidStudioProjects/Media/demos/media3/src/main/res/drawable/ic_baseline_folder_24.xml" value="0.259375" />
+        <entry key="..\:/ChengFu/AndroidStudioProjects/Media/demos/media3/src/main/res/layout/activity_main.xml" value="0.21920289855072464" />
+        <entry key="..\:/ChengFu/AndroidStudioProjects/Media/demos/media3/src/main/res/layout/activity_main1.xml" value="0.15572916666666667" />
+        <entry key="..\:/ChengFu/AndroidStudioProjects/Media/demos/media3/src/main/res/layout/activity_playable_folder.xml" value="0.14010416666666667" />
+        <entry key="..\:/ChengFu/AndroidStudioProjects/Media/demos/media3/src/main/res/layout/activity_player.xml" value="0.15572916666666667" />
+        <entry key="..\:/ChengFu/AndroidStudioProjects/Media/demos/media3/src/main/res/layout/folder_items.xml" value="0.14010416666666667" />
+        <entry key="..\:/ChengFu/AndroidStudioProjects/Media/demos/media3/src/main/res/layout/item_folder.xml" value="0.3333333333333333" />
+        <entry key="..\:/ChengFu/AndroidStudioProjects/Media/demos/media3/src/main/res/layout/playable_items.xml" value="0.15572916666666667" />
+        <entry key="..\:/ChengFu/AndroidStudioProjects/Media/demos/media3/src/main/res/layout/player_control_view.xml" value="0.19375" />
+        <entry key="..\:/ChengFu/AndroidStudioProjects/Media/demos/media3/src/main/res/layout/playlist_items.xml" value="0.14010416666666667" />
+        <entry key="..\:/ChengFu/AndroidStudioProjects/Media/libraries/ui/src/main/res/drawable/fu_ic_play.xml" value="0.1575" />
+        <entry key="..\:/ChengFu/AndroidStudioProjects/Media/libraries/ui/src/main/res/layout/fu_player_control_view.xml" value="0.2105978260869565" />
+        <entry key="..\:/ChengFu/AndroidStudioProjects/Media/libraries/ui/src/main/res/layout/fu_player_render_view.xml" value="0.20244565217391305" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

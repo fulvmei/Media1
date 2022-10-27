@@ -1,0 +1,28 @@
+//apply plugin: 'com.android.library'
+
+//plugins {
+//    id 'com.android.application'
+//}
+plugins {
+    id 'com.android.library'
+}
+//apply plugin: 'com.android.library'
+apply from: "constants.gradle"
+
+android {
+    compileSdkVersion project.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
+        consumerProguardFiles 'proguard-rules.txt'
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    testOptions.unitTests.includeAndroidResources = true
+}

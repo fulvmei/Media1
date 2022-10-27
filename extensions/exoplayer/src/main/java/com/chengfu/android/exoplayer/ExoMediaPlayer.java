@@ -3,68 +3,64 @@ package com.chengfu.android.exoplayer;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-import com.chengfu.android.media.common.BaseMediaPlayer;
-import com.chengfu.android.media.common.MediaItem;
-import com.chengfu.android.media.common.MediaPlayer;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.common.util.concurrent.ListenableFuture;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class ExoMediaPlayer extends BaseMediaPlayer {
 
     final Player player;
-    @PlayerState
-    private int playerState;
+    final List<MediaItem> mediaItemList;
+    MediaItemSource mediaItemSource;
 
 //    MediaItemList mPlaylist = new MediaItemList();
 
     MediaItem curPlaylistItem;
 
     public ExoMediaPlayer(@NonNull Context context) {
-        playerState = PLAYER_STATE_IDLE;
+        this(context, null);
+    }
+
+    public ExoMediaPlayer(@NonNull Context context, @Nullable MediaItemSource mediaItemSource) {
+        this.mediaItemSource = mediaItemSource;
         player = new SimpleExoPlayer.Builder(context).build();
-    }
-
-    @NonNull
-    @Override
-    public ListenableFuture<PlayerResult> prepare() {
-        return null;
-    }
-
-    @NonNull
-    @Override
-    public ListenableFuture<PlayerResult> play() {
-        return null;
-    }
-
-    @NonNull
-    @Override
-    public ListenableFuture<PlayerResult> pause() {
-        return null;
-    }
-
-    @NonNull
-    @Override
-    public ListenableFuture<PlayerResult> seekTo(long position) {
-        return null;
+        player.addListener(new ExoEventListener());
+        mediaItemList = new ArrayList<>();
     }
 
     @Override
-    public int getPlayerState() {
-        return playerState;
+    public void prepare() {
+
+        player.prepare();
     }
 
     @Override
-    public void setMediaItemProvider(MediaItemProvider mediaItemProvider) {
-
+    public void play() {
+        player.setPlayWhenReady(true);
     }
 
-    @NonNull
     @Override
-    public ListenableFuture<PlayerResult> setMediaItem(@NonNull MediaItem item) {
-        com.google.android.exoplayer2.MediaItem mediaItem=com.google.android.exoplayer2.MediaItem.fromUri(item.url);
-        player.setMediaItem(mediaItem);
-        return null;
+    public void pause() {
+        player.setPlayWhenReady(false);
     }
+
+    @Override
+    public void seekTo(long position) {
+        player.seekTo(position);
+    }
+
+    @Override
+    public void setMediaItem(@NonNull MediaItem item) {
+        mediaItemList.clear();
+        mediaItemList.add(item);
+    }
+
+    static class ExoEventListener implements Player.EventListener {
+
+    }
+
 }
